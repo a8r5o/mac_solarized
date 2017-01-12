@@ -7,6 +7,7 @@ export LANG=en_US.UTF-8
 alias bagram="ssh aro@10.47.47.252"
 alias ppv='puppet parser validate'
 alias puppetdeploy='ssh root@puppet.cl.no r10k deploy environment production -v && ssh root@puppet.cl.no apache2ctl graceful'
+alias vim="nvim"
 
 #shared host reverse lookup
 function shdig {dig "$1" +short | xargs dig +short -x; }
