@@ -8,13 +8,17 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible' 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'pearofducks/ansible-vim'
-Plugin 'vim-scripts/indentpython.vim'
-"Vundle will tell us that the installtion failed
+"Vundle will tell us that the YCM installtion failed
 "remember to do a "pip install neovim" before 
 "running the installation script for YCM in YCM folder:
 "./install.sh --clang-completer --system-libclang --omnisharp-completer
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-scripts/applescript.vim'
+Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
 filetype plugin indent on
