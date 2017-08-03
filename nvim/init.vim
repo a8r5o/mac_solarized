@@ -11,7 +11,7 @@ Plugin 'pearofducks/ansible-vim'
 "Vundle will tell us that the YCM installtion failed
 "remember to do a "pip install neovim" before 
 "running the installation script for YCM in YCM folder:
-"./install.sh --clang-completer --system-libclang --omnisharp-completer
+"./install.sh --clang-completer --system-libclang
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indentpython.vim'
@@ -19,6 +19,7 @@ Plugin 'vim-scripts/applescript.vim'
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'rkitover/vimpager'
 
 call vundle#end()
 filetype plugin indent on
@@ -34,18 +35,15 @@ set background=dark
 colorscheme solarized
 
 " sensible tab
-set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
-
-" security issue in modelines, might be dated
-set modelines=0
+" set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 
 set encoding=utf-8
 set scrolloff=3
-set autoindent
+"set autoindent
 set showmode
-set showcmd
+"set showcmd
 set hidden
-set wildmenu
+"set wildmenu
 set wildmode=list:longest
 set visualbell
 set cursorline
@@ -58,7 +56,7 @@ set undofile
 
 " use "," as leader
 let mapleader = ","
-
+"
 " python regex
 nnoremap / /\v
 vnoremap / /\v
