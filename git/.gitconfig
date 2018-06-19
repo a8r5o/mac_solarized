@@ -2,6 +2,8 @@
 	email = andreas.rosland@copyleft.no
 	name = Andreas Rosland
 [core]
-	editor = vim
+	editor = nvim
+	excludesfile = /Users/aro/.gitignore
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = checkout

@@ -1,1 +1,6 @@
+*.un~
 zsh/.zshenv
+QtProject/
+gtk-2.0/
+deluge/
+filezilla/

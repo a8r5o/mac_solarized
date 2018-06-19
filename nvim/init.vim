@@ -30,7 +30,7 @@ filetype plugin indent on
 " " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 syntax enable
-set background=dark
+"set background=dark
 "let g:solarized_termcolors=256
 colorscheme solarized
 

@@ -18,9 +18,9 @@ function shdig {
     name=$(dig "$1" +short |tail -n1| xargs dig +short -x ; )
     if [ -z $name ]; then
         echo "${RED}No reverse lookup available for $1${NC}"
-        #Parse whois info for network name on the first IP returned by dig 
+        #Parse whois info for network name on the first IP returned by dig
         #to check if the site is behind a CDN
-        networkname=$(whois $(dig +short $1 | head -n 1) 2> /dev/null | 
+        networkname=$(whois $(dig +short $1 | head -n 1) 2> /dev/null |
         grep -i "netname" | awk -F ':' '{print $2}')
         if [ ! -z $networkname ]; then
             echo "Networkname: $networkname"
@@ -49,7 +49,7 @@ function webwash {  ssh webwash01.clh.no "cat /etc/apache2/sites-enabled/$1*" | 
 
 #TLS cert check
 function tlscert {
-    echo | openssl s_client -showcerts -servername $1 -connect $1:443 2> /dev/null | 
+    echo | openssl s_client -showcerts -servername $1 -connect $1:443 2> /dev/null |
     openssl x509 -inform pem -noout -text ;
 }
 
