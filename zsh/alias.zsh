@@ -14,18 +14,32 @@ function cr2jpg { for i in *.CR2; do sips -s format jpeg $i --out "${i%.*}.jpg";
 function shdig { 
     RED='\033[0;31m'
     NC='\033[0m' 
-    name=$(dig "$1" +short | xargs dig +short -x ; )
+    # i use tail -n1 to get correct results when the domain is a CNAME
+    name=$(dig "$1" +short |tail -n1| xargs dig +short -x ; )
     if [ -z $name ]; then
         echo "${RED}No reverse lookup available for $1${NC}"
+        #Parse whois info for network name on the first IP returned by dig 
+        #to check if the site is behind a CDN
+        networkname=$(whois $(dig +short $1 | head -n 1) 2> /dev/null | 
+        grep -i "netname" | awk -F ':' '{print $2}')
+        if [ ! -z $networkname ]; then
+            echo "Networkname: $networkname"
+        fi
     elif [ $name = "webwash01.clh.no." ]; then
         echo "${RED}Behind webwash.clh.no${NC}"
-        ssh webwash01.clh.no "cat /etc/apache2/sites-enabled/$1*" | grep -v "#" |
-        grep -m 1 "ProxyPass" | awk -F '/' '{ print $(NF-1) }' ;
+        #Extract the actual server the site is on from webwash
+        webwashname=$(ssh webwash01.clh.no "cat /etc/apache2/sites-enabled/$1*" | grep -v "#" |
+        grep -m 1 "ProxyPass" | awk -F '/' '{ print $(NF-1) }')
+        #if there isnt any proxypass statement print config without comments
+        if [ -z $webwashname ]; then
+            ssh webwash01.clh.no "cat /etc/apache2/sites-enabled/$1*" | grep -v "#"
+        else
+            echo $webwashname
+        fi
     else
         echo $name
     fi
     }
-
 
 #short dig
 function sdig { dig "$1" +short; }
@@ -34,9 +48,11 @@ function sdig { dig "$1" +short; }
 function webwash {  ssh webwash01.clh.no "cat /etc/apache2/sites-enabled/$1*" | grep -v "#"; }
 
 #TLS cert check
-tlscert () {
-    echo | openssl s_client -showcerts -servername $1 -connect $1:443 2> /dev/null | openssl x509 -inform pem -noout -text
+function tlscert {
+    echo | openssl s_client -showcerts -servername $1 -connect $1:443 2> /dev/null | 
+    openssl x509 -inform pem -noout -text ;
 }
+
 
 
 # markdown commandline reader
