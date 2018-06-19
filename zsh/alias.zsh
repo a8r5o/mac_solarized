@@ -18,7 +18,7 @@ function shdig {
     if [ -z $name ]; then
         echo "${RED}No reverse lookup available for $1${NC}"
     elif [ $name = "webwash01.clh.no." ]; then
-        echo "${RED}In webwash.clh.no${NC}"
+        echo "${RED}Behind webwash.clh.no${NC}"
         ssh webwash01.clh.no "cat /etc/apache2/sites-enabled/$1*" | grep -v "#" |
         grep -m 1 "ProxyPass" | awk -F '/' '{ print $(NF-1) }' ;
     else
