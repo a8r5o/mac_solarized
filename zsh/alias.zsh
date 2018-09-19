@@ -53,10 +53,11 @@ function tlscert {
     openssl x509 -inform pem -noout -text ;
 }
 
-
-
 # markdown commandline reader
 #function mdread { pandoc -t plain $1 | less; }
 
 # mosh tmux attach, should be improved so I can map it to mosh
 function mosht { mosh $1 -- tmux attach -t 0 -d; }
+
+#fetch all git repos bellow
+function gitfetch { find . -name .git -type d -exec git --git-dir '{}' fetch --all ';'; }
